@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro e Login com Firebase</title>
+  <style>
+    /* Estilo base para os formulários */
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    /* Wrapper para o campo de senha e o ícone */
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Campo de entrada */
+    input[type="password"], input[type="email"] {
+      width: 100%;
+      padding-right: 35px; /* Espaço para o ícone */
+      box-sizing: border-box;
+    }
+
+    /* Ícone do olho */
+    .toggle-password {
+      cursor: pointer;
+      position: absolute;
+      right: 10px; /* Alinhado à direita */
+      font-size: 1.2em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cadastro e Login com Firebase</h1>
+
+  <!-- Formulário de Cadastro -->
+  <form id="registerForm">
+    <h2>Cadastro</h2>
+    <div class="form-group">
+      <input type="email" name="email" placeholder="Email" required />
+    </div>
+    <div class="form-group password-wrapper">
+      <input type="password" name="password" id="registerPassword" placeholder="Senha" required />
+      <span class="toggle-password" data-target="registerPassword">👁️</span>
+    </div>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <!-- Formulário de Login -->
+  <form id="loginForm">
+    <h2>Login</h2>
+    <div class="form-group">
+      <input type="email" name="email" placeholder="Email" required />
+    </div>
+    <div class="form-group password-wrapper">
+      <input type="password" name="password" id="loginPassword" placeholder="Senha" required />
+      <span class="toggle-password" data-target="loginPassword">👁️</span>
+    </div>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <script src="./src/cadastro.js" type="module"></script>
+  <script src="./src/login.js" type="module"></script>
+
+  <script>
+    // Alternar visibilidade da senha
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleButtons = document.querySelectorAll(".toggle-password");
+
+      toggleButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          const targetId = button.getAttribute("data-target");
+          const passwordField = document.getElementById(targetId);
+
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+            button.textContent = "🙈"; // Ícone para "esconder"
+          } else {
+            passwordField.type = "password";
+            button.textContent = "👁️"; // Ícone para "mostrar"
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
